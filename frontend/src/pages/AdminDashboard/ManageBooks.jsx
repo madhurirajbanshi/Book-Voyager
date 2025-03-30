@@ -10,7 +10,7 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch("http://localhost:5000/books/");
+        const response = await fetch("https://book-voyager.onrender.com/books/");
         const result = await response.json();
 
         if (result.status === "Success" && Array.isArray(result.data)) {
@@ -34,7 +34,7 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
         return;
       }
 
-      const response = await fetch(`http://localhost:5000/books/${id}`, {
+      const response = await fetch(`https://book-voyager.onrender.com/books/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },
       });
