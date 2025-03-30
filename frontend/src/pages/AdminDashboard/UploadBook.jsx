@@ -22,7 +22,7 @@ const UploadBook = () => {
     console.log("Book Data:", formData);
 
     try {
-      const response = await fetch("http://localhost:5000/books/add", {
+      const response = await fetch("https://book-voyager.onrender.com/books/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
