@@ -15,7 +15,6 @@ const Navbar = () => {
   const isLoggedIn =
     !!localStorage.getItem("token") || !!sessionStorage.getItem("token");
 
-  // Close menu when clicking outside
   useEffect(() => {
     function handleClickOutside(event) {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
@@ -23,12 +22,10 @@ const Navbar = () => {
       }
     }
 
-    // Add the event listener when menu is open
     if (menuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
 
-    // Remove the listener when component unmounts or menu closes
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -55,7 +52,7 @@ const Navbar = () => {
     if (e.key === "Enter" || e.type === "click") {
       if (searchQuery.trim()) {
         navigate(`/search?title=${searchQuery}`);
-        setMenuOpen(false); // Close menu after search
+        setMenuOpen(false); 
       }
     }
   };
@@ -70,7 +67,6 @@ const Navbar = () => {
     navigate("/login");
   };
 
-  // Close menu when a navigation link is clicked
   const handleNavLinkClick = () => {
     setMenuOpen(false);
   };
