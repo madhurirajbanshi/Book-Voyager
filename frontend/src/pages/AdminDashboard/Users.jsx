@@ -17,7 +17,7 @@ const Users = () => {
       }
 
       const response = await axios.get(
-        "http://localhost:5000/auth/user", 
+        "https://book-voyager.onrender.com/auth/user", 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,7 +54,7 @@ const Users = () => {
       }
 
       const response = await axios.delete(
-        `http://localhost:5000/auth/user/${id}`,
+        `https://book-voyager.onrender.com/auth/user/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
