@@ -18,7 +18,7 @@ const Cart = () => {
   const fetchCartItems = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:5000/cart/getcart", {
+      const response = await axios.get("https://book-voyager.onrender.com/cart/getcart", {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -52,7 +52,7 @@ const Cart = () => {
         updatedCart[existingItemIndex].quantity += 1;
 
         await axios.patch(
-          `http://localhost:5000/cart/update/${book._id}`,
+          `https://book-voyager.onrender.com/cart/update/${book._id}`,
           { quantity: updatedCart[existingItemIndex].quantity },
           { headers: { Authorization: `Bearer ${token}` } }
         );
@@ -61,13 +61,13 @@ const Cart = () => {
         calculateTotal(updatedCart);
       } else {
         const response = await axios.post(
-          "http://localhost:5000/cart/add",
+          "https://book-voyager.onrender.com/cart/add",
           { bookId: book._id, quantity: 1 },
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
         const updatedCartResponse = await axios.get(
-          "http://localhost:5000/cart/getcart",
+          "https://book-voyager.onrender.com/cart/getcart",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -95,7 +95,7 @@ const Cart = () => {
       const token = localStorage.getItem("token");
 
       await axios.patch(
-        `http://localhost:5000/cart/update/${bookId}`,
+        `https://book-voyager.onrender.com/cart/update/${bookId}`,
         { quantity: newQuantity },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -115,7 +115,7 @@ const Cart = () => {
   const removeFromCart = async (bookId) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/cart/remove/${bookId}`, {
+      await axios.delete(`https://book-voyager.onrender.com/cart/remove/${bookId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -167,7 +167,7 @@ const Cart = () => {
           return;
         }
 
-      await axios.post("http://localhost:5000/orders/place", orderData, {
+      await axios.post("https://book-voyager.onrender.com/orders/place", orderData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
