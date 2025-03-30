@@ -10,7 +10,7 @@ const Favourite = () => {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await axios.get("http://localhost:5000/favourites/", {
+        const response = await axios.get("https://book-voyager.onrender.com/favourites/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -29,7 +29,7 @@ const Favourite = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.delete(`http://localhost:5000/favourites/remove/${_id}`, {
+      await axios.delete(`https://book-voyager.onrender.com/favourites/remove/${_id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFavouriteBooks(FavouriteBooks.filter((book) => book._id !== _id));
