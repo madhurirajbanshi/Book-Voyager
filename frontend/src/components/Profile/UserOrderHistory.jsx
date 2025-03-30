@@ -14,7 +14,7 @@ const UserOrderHistory = () => {
       const token = localStorage.getItem("token");
       try {
         const response = await axios.get(
-          "http://localhost:5000/orders/getorders",
+          "https://book-voyager.onrender.com/orders/getorders",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
