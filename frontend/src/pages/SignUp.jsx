@@ -48,7 +48,7 @@ const SignUp = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:5000/auth/sign-up", {
+      const response = await axios.post("https://book-voyager.onrender.com/auth/sign-up", {
         username: values.username,
         email: values.email,
         password: values.password,
