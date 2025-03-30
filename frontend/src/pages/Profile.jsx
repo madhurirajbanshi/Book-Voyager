@@ -22,7 +22,7 @@ const Profile = () => {
 
         console.log("Fetching user data...");
         const response = await axios.get(
-          "http://localhost:5000/auth/userinformation",
+          "https://book-voyager.onrender.com/auth/userinformation",
           {
             headers: {
               Authorization: `Bearer ${token}`,
