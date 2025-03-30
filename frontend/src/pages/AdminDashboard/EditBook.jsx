@@ -32,7 +32,7 @@ const EditBook = ({ book, setEditingBook, setBooks }) => {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/books/${editedBook._id}`,
+        `https://book-voyager.onrender.com/books/${editedBook._id}`,
         {
           method: "PUT",
           headers: {
