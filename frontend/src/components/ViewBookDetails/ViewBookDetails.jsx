@@ -27,7 +27,7 @@ const ViewBookDetails = () => {
   useEffect(() => {
     const fetchBookDetails = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/books/");
+        const response = await axios.get("https://book-voyager.onrender.com/books/");
         const bookDetails = response.data.data.find((item) => item._id === id);
         if (bookDetails) {
           setBook(bookDetails);
@@ -44,7 +44,7 @@ const ViewBookDetails = () => {
 
     const fetchFeedbacks = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/feedback");
+        const response = await axios.get("https://book-voyager.onrender.com/feedback");
         const bookFeedbacks = response.data.data.filter(
           (item) => item.bookId === id
         );
@@ -60,7 +60,7 @@ const ViewBookDetails = () => {
 
       try {
         const userResponse = await axios.get(
-          "http://localhost:5000/auth/userinformation",
+          "https://book-voyager.onrender.com/auth/userinformation",
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -70,7 +70,7 @@ const ViewBookDetails = () => {
         setCurrentUser(userResponse.data);
 
         const favResponse = await axios.get(
-          "http://localhost:5000/favourites",
+          "https://book-voyager.onrender.com/favourites",
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ const ViewBookDetails = () => {
         );
         setIsFavorite(favResponse.data.some((item) => item.bookId === id));
 
-        const cartResponse = await axios.get("http://localhost:5000/cart/getcart", {
+        const cartResponse = await axios.get("https://book-voyager.onrender.com/cart/getcart", {
           headers: { authorization: `Bearer ${token}` },
         });
 
@@ -108,7 +108,7 @@ const ViewBookDetails = () => {
     try {
       if (isFavorite) {
         await axios.delete(
-          `http://localhost:5000/favourites/remove/${book._id}`,
+          `https://book-voyager.onrender.com/favourites/remove/${book._id}`,
           {
             headers: {
               authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -119,7 +119,7 @@ const ViewBookDetails = () => {
         toast.success("Removed from favorites");
       } else {
         await axios.post(
-          "http://localhost:5000/favourites/add",
+          "https://book-voyager.onrender.com/favourites/add",
           { bookId: book._id },
           {
             headers: {
@@ -148,14 +148,14 @@ const ViewBookDetails = () => {
 
     try {
       if (isInCart) {
-        await axios.delete(`http://localhost:5000/cart/remove/${book._id}`, {
+        await axios.delete(`https://book-voyager.onrender.com/cart/remove/${book._id}`, {
           headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
         });
         setIsInCart(false);
         toast.success("Removed from cart");
       } else {
         await axios.post(
-          "http://localhost:5000/cart/add",
+          "https://book-voyager.onrender.com/cart/add",
           { bookId: book._id },
           {
             headers: {
@@ -186,7 +186,7 @@ const ViewBookDetails = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/books/rate",
+        "https://book-voyager.onrender.com/books/rate",
         {
           bookId: book._id,
           rating: newRating,
@@ -218,7 +218,7 @@ const ViewBookDetails = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/feedback/add",
+        "https://book-voyager.onrender.com/feedback/add",
         {
           bookId: book._id,
           feedback: feedback,
@@ -241,7 +241,7 @@ const ViewBookDetails = () => {
 
   const handleDeleteFeedback = async (feedbackId) => {
     try {
-      await axios.delete(`http://localhost:5000/feedback/${feedbackId}`, {
+      await axios.delete(`https://book-voyager.onrender.com/feedback/${feedbackId}`, {
         headers: { authorization: `Bearer ${localStorage.getItem("token")}` },
       });
 
