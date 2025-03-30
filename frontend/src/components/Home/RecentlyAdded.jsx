@@ -9,7 +9,7 @@ const RecentlyAdded = () => {
     const fetchBooks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/books/recentbooks"
+          "https://book-voyager.onrender.com/books/recentbooks"
         );
         console.log("Fetched Data:", response.data);
         setData(response.data.data);
