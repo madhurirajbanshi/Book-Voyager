@@ -15,7 +15,6 @@ const SearchBooks = () => {
   const location = useLocation();
   const token = localStorage.getItem("token");
 
-  // Extract search query from URL on component mount
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
     const titleParam = queryParams.get("title");
@@ -26,7 +25,6 @@ const SearchBooks = () => {
     }
   }, [location.search]);
 
-  // Check user's favorite books and cart items
   useEffect(() => {
     if (token) {
       fetchUserInteractions();
@@ -37,8 +35,7 @@ const SearchBooks = () => {
     if (!token) return;
 
     try {
-      // Fetch user favorites
-      const favResponse = await axios.get("http://localhost:5000/favourites", {
+      const favResponse = await axios.get("https://book-voyager.onrender.com/favourites", {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -50,9 +47,8 @@ const SearchBooks = () => {
       });
       setFavorites(favoritesMap);
 
-      // Fetch user cart
       const cartResponse = await axios.get(
-        "http://localhost:5000/cart/getcart",
+        "https://book-voyager.onrender.com/cart/getcart",
         {
           headers: { authorization: `Bearer ${token}` },
         }
@@ -77,7 +73,7 @@ const SearchBooks = () => {
 
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:5000/books/");
+      const response = await axios.get("https://book-voyager.onrender.com/books/");
       const foundBooks = response.data.data.filter((book) =>
         book.title.toLowerCase().includes(searchFor.toLowerCase())
       );
@@ -104,7 +100,7 @@ const SearchBooks = () => {
   };
 
   const handleFavorite = async (e, bookId) => {
-    e.stopPropagation(); // Prevent triggering book click
+    e.stopPropagation(); 
 
     if (!token) {
       toast.info("Please login to add to favorites");
@@ -114,7 +110,7 @@ const SearchBooks = () => {
     try {
       if (favorites[bookId]) {
         await axios.delete(
-          `http://localhost:5000/favourites/remove/${bookId}`,
+          `https://book-voyager.onrender.com/favourites/remove/${bookId}`,
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -125,7 +121,7 @@ const SearchBooks = () => {
         toast.success("Removed from favorites");
       } else {
         await axios.post(
-          "http://localhost:5000/favourites/add",
+          "https://book-voyager.onrender.com/favourites/add",
           { bookId },
           {
             headers: {
@@ -143,7 +139,7 @@ const SearchBooks = () => {
   };
 
   const handleCart = async (e, bookId) => {
-    e.stopPropagation(); // Prevent triggering book click
+    e.stopPropagation(); 
 
     if (!token) {
       toast.info("Please login to add to cart");
@@ -152,14 +148,14 @@ const SearchBooks = () => {
 
     try {
       if (cartItems[bookId]) {
-        await axios.delete(`http://localhost:5000/cart/remove/${bookId}`, {
+        await axios.delete(`https://book-voyager.onrender.com/cart/remove/${bookId}`, {
           headers: { authorization: `Bearer ${token}` },
         });
         setCartItems((prev) => ({ ...prev, [bookId]: false }));
         toast.success("Removed from cart");
       } else {
         await axios.post(
-          "http://localhost:5000/cart/add",
+          "https://book-voyager.onrender.com/cart/add",
           { bookId },
           {
             headers: {
