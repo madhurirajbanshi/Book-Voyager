@@ -37,7 +37,7 @@ const Sidebar = ({ user, loading }) => {
 const SidebarLink = ({ to, label }) => (
   <Link
     to={to}
-    className="block p-3 text-center bg-pink-100 hover:bg-pink-100 transition-all rounded-lg text-gray-700 font-medium"
+    className="block p-2 text-center bg-pink-100 hover:bg-pink-100 transition-all rounded-lg text-gray-700 font-medium"
   >
     {label}
   </Link>
