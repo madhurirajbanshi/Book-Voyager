@@ -15,6 +15,7 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false); 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,13 +40,10 @@ const Login = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post(
-        "https://book-voyager.onrender.com/auth/sign-in",
-        {
-          username: values.username,
-          password: values.password,
-        }
-      );
+      const response = await axios.post("https://book-voyager.onrender.com/auth/sign-in", {
+        username: values.username,
+        password: values.password,
+      });
 
       const { token, id, role } = response.data;
 
@@ -57,9 +55,15 @@ const Login = () => {
       dispatch(authActions.login());
       dispatch(authActions.changeRole(role));
 
-      sessionStorage.setItem("token", token);
-      sessionStorage.setItem("userId", id);
-      sessionStorage.setItem("role", role);
+      if (rememberMe) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userId", id);
+        localStorage.setItem("role", role);
+      } else {
+        sessionStorage.setItem("token", token);
+        sessionStorage.setItem("userId", id);
+        sessionStorage.setItem("role", role);
+      }
 
       navigate("/");
     } catch (error) {
@@ -120,6 +124,23 @@ const Login = () => {
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password}</p>
             )}
+          </div>
+
+          <div className="mb-4 flex items-center">
+            <input
+              type="checkbox"
+              id="rememberMe"
+              name="rememberMe"
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+              className="w-4 h-4 text-pink-600 border-gray-300 rounded focus:ring-pink-500"
+            />
+            <label
+              htmlFor="rememberMe"
+              className="ml-2 text-gray-700 text-lg font-medium"
+            >
+              Remember Me
+            </label>
           </div>
 
           <div className="mb-6">
