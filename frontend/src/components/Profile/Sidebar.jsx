@@ -4,7 +4,7 @@ const Sidebar = ({ user, loading }) => {
   const navigate = useNavigate();
 
   return (
-    <aside className="bg-white p-6 rounded-xl border-r border-gray-300 w-full h-screen flex flex-col items-center">
+    <aside className="bg-white p-8 rounded-xl border-r border-gray-300 w-full h-screen flex flex-col items-center">
       {loading ? (
         <p className="text-gray-500">Loading...</p>
       ) : user ? (
