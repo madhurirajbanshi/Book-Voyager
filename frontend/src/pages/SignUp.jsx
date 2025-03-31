@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { FaUser, FaEnvelope, FaMapMarkerAlt, FaLock } from "react-icons/fa";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -11,7 +12,7 @@ const SignUp = () => {
     password: "",
     confirmPassword: "",
     address: "",
-    role: "admin",
+    role: "user",
   });
 
   const [errors, setErrors] = useState({});
@@ -72,7 +73,7 @@ const SignUp = () => {
 
   return (
     <div className="container mx-auto px-4 md:px-16 py-8">
-      <div className="max-w-md mx-auto bg-white p-4 rounded-lg shadow-lg">
+      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center text-gray-900 mb-4">
           Sign Up
         </h2>
@@ -87,14 +88,17 @@ const SignUp = () => {
             >
               Username
             </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              value={values.username}
-              onChange={handleChange}
-              className="w-full p-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
+            <div className="flex items-center border rounded-lg p-2">
+              <FaUser className="text-gray-500 mr-2" />
+              <input
+                type="text"
+                id="username"
+                name="username"
+                value={values.username}
+                onChange={handleChange}
+                className="w-full outline-none"
+              />
+            </div>
             {errors.username && (
               <p className="text-red-500 text-sm">{errors.username}</p>
             )}
@@ -107,14 +111,17 @@ const SignUp = () => {
             >
               Email
             </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={values.email}
-              onChange={handleChange}
-              className="w-full p-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
+            <div className="flex items-center border rounded-lg p-2">
+              <FaEnvelope className="text-gray-500 mr-2" />
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={values.email}
+                onChange={handleChange}
+                className="w-full outline-none"
+              />
+            </div>
             {errors.email && (
               <p className="text-red-500 text-sm">{errors.email}</p>
             )}
@@ -123,18 +130,21 @@ const SignUp = () => {
           <div className="mb-4">
             <label
               htmlFor="address"
-              className="block text-lg font-medium  text-gray-700"
+              className="block text-lg font-medium text-gray-700"
             >
               Address
             </label>
-            <input
-              type="text"
-              id="address"
-              name="address"
-              value={values.address}
-              onChange={handleChange}
-              className="w-full p-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
+            <div className="flex items-center border rounded-lg p-2">
+              <FaMapMarkerAlt className="text-gray-500 mr-2" />
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={values.address}
+                onChange={handleChange}
+                className="w-full outline-none"
+              />
+            </div>
             {errors.address && (
               <p className="text-red-500 text-sm">{errors.address}</p>
             )}
@@ -147,14 +157,17 @@ const SignUp = () => {
             >
               Password
             </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={values.password}
-              onChange={handleChange}
-              className="w-full p-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
+            <div className="flex items-center border rounded-lg p-2">
+              <FaLock className="text-gray-500 mr-2" />
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={values.password}
+                onChange={handleChange}
+                className="w-full outline-none"
+              />
+            </div>
             {errors.password && (
               <p className="text-red-500 text-sm">{errors.password}</p>
             )}
@@ -167,14 +180,17 @@ const SignUp = () => {
             >
               Confirm Password
             </label>
-            <input
-              type="password"
-              id="confirmPassword"
-              name="confirmPassword"
-              value={values.confirmPassword}
-              onChange={handleChange}
-              className="w-full p-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-500"
-            />
+            <div className="flex items-center border rounded-lg p-2">
+              <FaLock className="text-gray-500 mr-2" />
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                value={values.confirmPassword}
+                onChange={handleChange}
+                className="w-full outline-none"
+              />
+            </div>
             {errors.confirmPassword && (
               <p className="text-red-500 text-sm">{errors.confirmPassword}</p>
             )}

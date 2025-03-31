@@ -99,7 +99,7 @@ const UserOrderHistory = () => {
                 <button
                   key={index}
                   onClick={() => handlePageClick(index + 1)}
-                  className={`px-3 py-2 text-xs sm:text-sm rounded-full transition duration-200 ${
+                  className={`px-1 py-1 text-xs sm:text-sm rounded-full transition duration-200 ${
                     currentPage === index + 1
                       ? "bg-blue-500 text-white"
                       : "bg-gray-300 text-black hover:bg-gray-400"
