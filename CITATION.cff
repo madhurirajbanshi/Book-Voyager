@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Rajbanshi"
+  given-names: "Madhurri"
+title: "Page-Voyage"
+version: 0.1.0
+date-released: 2025-03-31
+url: "https://github.com/madhurrirajbanshi/Page-Voyage"
+repository-code: "https://github.com/madhurrirajbanshi/Page-Voyage"
+keywords:
+  - web-application
+  - login-page
+  - signup-page
+repository-artifact: "https://github.com/madhurrirajbanshi/Page-Voyage"
+abstract: "A web application with frontend and backend components for user authentication and navigation."
