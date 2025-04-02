@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "../BookCard/BookCard";
-
+import Loader from "../Loader/Loader";
 const Favourite = () => {
   const [FavouriteBooks, setFavouriteBooks] = useState([]);
-
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchFavourites = async () => {
       const token = localStorage.getItem("token");
 
       try {
-        const response = await axios.get("https://book-voyager.onrender.com/favourites/", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await axios.get(
+          "https://book-voyager.onrender.com/favourites/",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
         setFavouriteBooks(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -23,15 +26,21 @@ const Favourite = () => {
 
     fetchFavourites();
   }, []);
+  if (loading) {
+    return <Loader />;
+  }
 
   const handleRemoveFavourite = async (_id) => {
     console.log("Trying to remove favorite with ID:", _id);
     const token = localStorage.getItem("token");
 
     try {
-      await axios.delete(`https://book-voyager.onrender.com/favourites/remove/${_id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `https://book-voyager.onrender.com/favourites/remove/${_id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       setFavouriteBooks(FavouriteBooks.filter((book) => book._id !== _id));
     } catch (error) {
       console.error("Error removing favourite:", error);
