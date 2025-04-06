@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BookCard from "../BookCard/BookCard";
 import Loader from "../Loader/Loader";
+
 const Favourite = () => {
-  const [FavouriteBooks, setFavouriteBooks] = useState([]);
+  const [favouriteBooks, setFavouriteBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const fetchFavourites = async () => {
       const token = localStorage.getItem("token");
@@ -21,17 +23,15 @@ const Favourite = () => {
         setFavouriteBooks(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false); 
       }
     };
 
     fetchFavourites();
   }, []);
-  if (loading) {
-    return <Loader />;
-  }
 
   const handleRemoveFavourite = async (_id) => {
-    console.log("Trying to remove favorite with ID:", _id);
     const token = localStorage.getItem("token");
 
     try {
@@ -41,21 +41,26 @@ const Favourite = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setFavouriteBooks(FavouriteBooks.filter((book) => book._id !== _id));
+      setFavouriteBooks(favouriteBooks.filter((book) => book._id !== _id));
     } catch (error) {
       console.error("Error removing favourite:", error);
     }
   };
 
+  if (loading) {
+    return <Loader />; 
+  }
+
   return (
     <div className="p-4 sm:p-6 lg:p-8 flex flex-col items-center">
-      {FavouriteBooks.length === 0 && (
+      {favouriteBooks.length === 0 && (
         <div className="text-center text-gray-500 text-lg sm:text-xl">
           No Favorite Books
         </div>
       )}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl">
-        {FavouriteBooks?.map((item, i) => (
+        {favouriteBooks?.map((item, i) => (
           <div key={i} className="relative">
             <button
               onClick={() => handleRemoveFavourite(item._id)}

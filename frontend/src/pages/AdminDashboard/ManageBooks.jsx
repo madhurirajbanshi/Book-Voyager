@@ -1,16 +1,20 @@
 import { useState, useEffect } from "react";
 import { FaEdit } from "react-icons/fa";
 import { RiChatDeleteLine } from "react-icons/ri";
+import Loader from "../../components/Loader/Loader";
 
 const ManageBooks = ({ onNavigate, setEditingBook }) => {
   const [books, setBooks] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const booksPerPage = 4;
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const response = await fetch("https://book-voyager.onrender.com/books/");
+        const response = await fetch(
+          "https://book-voyager.onrender.com/books/"
+        );
         const result = await response.json();
 
         if (result.status === "Success" && Array.isArray(result.data)) {
@@ -34,10 +38,13 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
         return;
       }
 
-      const response = await fetch(`https://book-voyager.onrender.com/books/${id}`, {
-        method: "DELETE",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `https://book-voyager.onrender.com/books/${id}`,
+        {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
 
       if (response.ok) {
         setBooks(books.filter((book) => book._id !== id));
@@ -61,7 +68,6 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
 
   return (
     <div className="p-4 bg-white mt-8 rounded-lg shadow-md">
-      {/* Table Container */}
       <div className="overflow-x-auto">
         <table className="min-w-full border-collapse bg-white rounded-lg shadow-md">
           <thead className="bg-gray-100">
@@ -108,7 +114,7 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
             ) : (
               <tr>
                 <td colSpan="5" className="px-4 py-3 text-center">
-                  No books found.
+                  <Loader />
                 </td>
               </tr>
             )}
@@ -116,7 +122,6 @@ const ManageBooks = ({ onNavigate, setEditingBook }) => {
         </table>
       </div>
 
-      {/* Pagination */}
       <div className="mt-4 flex justify-center space-x-2">
         {Array.from({ length: totalPages }, (_, index) => (
           <button

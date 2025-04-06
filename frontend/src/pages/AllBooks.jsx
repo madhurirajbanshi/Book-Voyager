@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom"; 
 import Loader from "../components/Loader/Loader";
 import BookCard from "../components/BookCard/BookCard"; 
 import axios from "axios";
