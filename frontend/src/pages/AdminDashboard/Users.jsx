@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Loader from "../../components/Loader/Loader";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
 
   const fetchUsers = async () => {
     try {
@@ -17,7 +18,7 @@ const Users = () => {
       }
 
       const response = await axios.get(
-        "https://book-voyager.onrender.com/auth/user", 
+        "https://book-voyager.onrender.com/auth/user",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -25,15 +26,15 @@ const Users = () => {
         }
       );
 
-      console.log("API Response:", response.data); 
+      console.log("API Response:", response.data);
       setUsers(response.data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching users:", error);
       setError("Error fetching users");
       if (error.response && error.response.status === 401) {
-        localStorage.removeItem("token"); 
-        window.location.href = "/login"; 
+        localStorage.removeItem("token");
+        window.location.href = "/login";
       } else {
         setLoading(false);
       }
@@ -62,7 +63,7 @@ const Users = () => {
         }
       );
 
-      console.log("Delete response:", response.data); 
+      console.log("Delete response:", response.data);
       fetchUsers();
     } catch (error) {
       console.error("Error deleting user:", error);
@@ -72,12 +73,11 @@ const Users = () => {
 
   return (
     <div className="bg-white p-6 mt-8 rounded-lg ">
-
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
       {loading ? (
         <div className="flex justify-center items-center h-40">
-          <div className="spinner">Loading...</div>
+          <Loader />
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -128,9 +128,10 @@ const Users = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" className="text-center py-4 px-4 border-b">
-                    No users found
-                  </td>
+                  <td
+                    colSpan="4"
+                    className="text-center py-4 px-4 border-b"
+                  ></td>
                 </tr>
               )}
             </tbody>
